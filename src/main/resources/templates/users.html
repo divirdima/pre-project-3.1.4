@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<link href="/css/users.css" rel="stylesheet"/>
+</head>
+<body>
+	<div align="center">
+		<table border="1" width="300" height="40">
+			<tr>
+				<td>Id</td>
+				<td>Name</td>
+				<td>Money</td>
+			</tr>
+			<tr th:each="user : ${users}">
+				<td th:text="${user.getId()}" />
+				<td th:text="${user.getName()}" />
+				<td th:text="${user.getWallet()}" />
+				<td><a th:href="@{/admin/users/{id}(id=${user.getId()})}">user
+						page</a></td>
+				<td><a th:href="@{/admin/users/{id}/edit(id=${user.getId()})}">edit</a></td>
+			</tr>
+		</table>
+		<br>
+		<div style="background-color:#e0defc; border-radius:20px;">
+			<a href="/admin/users/new">add</a>
+		</div>
+	</div>
+</body>
+</html>

@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Add new user</title>
+</head>
+<body>
+	<br>
+	<h2>Add new user</h2>
+	<form th:method="post" th:action="@{/admin/new}" th:object="${user}">
+		<label for="name">Enter name</label> <input type="text"
+			th:field="*{name}" id="name" /> <br> <label for="money">Enter
+			sum on account</label> <input type="number" th:field="*{wallet}" id="money" />
+		<br> <input type="submit" value="Add" />
+	</form>
+</body>
+</html>

@@ -1,11 +1,21 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org" xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org" lang="en">
 <head>
-    <title>Spring Security Example</title>
+<meta charset="UTF-8">
+<title>Person page</title>
 </head>
 <body>
-<h1>User, welcome spring boot security page!</h1>
-
-
+	<div style="background-color:#eeedfa; border-radius:15px;"><br/>
+		<h2 th:text="${user.getName()}" align="center"></h2><br/>
+	</div>
+	<p>Total sum on account:</p>
+	<p th:text="${user.getWallet()}" /><br/>
+	
+	<div sec:authorize="hasRole('ROLE_ADMIN')">
+		<form th:method="DELETE" th:action="@{/admin/users/{id}/remove(id=${user.getId()})}">
+			<input type="submit" value="Delete account"/>
+		</form>
+	</div>
 </body>
 </html>
