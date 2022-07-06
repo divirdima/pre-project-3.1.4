@@ -13,11 +13,15 @@
 				<td>Id</td>
 				<td>Name</td>
 				<td>Money</td>
+				<td>Roles</td>
+				<td>Page</td>
+				<td>Edit</td>
 			</tr>
 			<tr th:each="user : ${users}">
 				<td th:text="${user.getId()}" />
 				<td th:text="${user.getName()}" />
 				<td th:text="${user.getWallet()}" />
+				<td th:text="${user.getRoleNames()}" />
 				<td><a th:href="@{/admin/users/{id}(id=${user.getId()})}">user
 						page</a></td>
 				<td><a th:href="@{/admin/users/{id}/edit(id=${user.getId()})}">edit</a></td>

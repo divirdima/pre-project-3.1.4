@@ -9,10 +9,18 @@
 	<br>
 	<h2>Add new user</h2>
 	<form th:method="post" th:action="@{/admin/new}" th:object="${user}">
-		<label for="name">Enter name</label> <input type="text"
-			th:field="*{name}" id="name" /> <br> <label for="money">Enter
-			sum on account</label> <input type="number" th:field="*{wallet}" id="money" />
-		<br> <input type="submit" value="Add" />
+		<label for="name">Enter name</label>
+		<input type="text" th:field="*{name}" id="name" /><br>
+		<label for="money">Enter sum on account</label>
+		<input type="number" th:field="*{wallet}" id="money" /><br>
+		<label>
+   			<select size="3" name="role" id="roles" multiple="multiple">
+   				<option disabled>Выберите роль</option>
+    			<option value="1">ADMIN</option>
+    			<option value="2">USER</option>
+   			</select>
+		</label>
+		<input type="submit" value="Add" />
 	</form>
 </body>
 </html>

@@ -9,13 +9,17 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import ru.kata.spring.boot_security.demo.model.Role;
 import ru.kata.spring.boot_security.demo.model.User;
 import ru.kata.spring.boot_security.demo.service.UserService;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Controller
 @RequestMapping("/admin")
@@ -37,7 +41,9 @@ public class AdminController {
 	}
 	
 	@PostMapping(value="/new")
-	public String create(@ModelAttribute("user") User user) {
+	public String create(@ModelAttribute("user") User user, @RequestParam(value="role") ArrayList<Long> roles) {
+		Set<Role> roleArrayList = userService.getRoles(roles);
+        user.setRoles(roleArrayList);
 		userService.save(user);
 		return "redirect:/admin/users";
 	}
@@ -55,7 +61,9 @@ public class AdminController {
 	}
 	
 	@PostMapping(value="/users/{id}")
-	public String saveUpdate(@ModelAttribute("user") User user, @PathVariable("id") int id) {
+	public String saveUpdate(@ModelAttribute("user") User user, @RequestParam(value="role") ArrayList<Long> roles , @PathVariable("id") int id) {
+		Set<Role> roleArrayList = userService.getRoles(roles);
+        user.setRoles(roleArrayList);
 		userService.update(id, user);
 		return "redirect:/admin/users";
 	}

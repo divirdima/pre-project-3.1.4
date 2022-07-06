@@ -7,13 +7,35 @@
 </head>
 <body>
 	<br>
+	<div align="center">
 	<h2>Update user</h2>
 	<form th:method="PATCH" th:action="@{/admin/users/{id}(id=${user.getId()})}" th:object="${user}">
-		<label for="name">Edit name</label>
-		<input type="text" th:field="*{name}" id="name" /> <br>
-		<label for="money">Edit sum</label>
-		<input type="number" th:field="*{wallet}" id="money" /> <br>
-		<input type="submit" value="Edit" />
-	</form>
+		<table border="5" cellpadding="15">
+			<tr>
+				<td>Edit name</td>
+				<td><input type="text" th:field="*{name}" id="name" /></td>
+			</tr>
+			<tr>
+				<td>Edit sum</td>
+				<td><input type="number" th:field="*{wallet}" id="money" /></td>
+			</tr>
+			<tr>
+				<label>
+   					<select size="3" name="role" id="roles" multiple="multiple">
+   						<option disabled>Выберите роль</option>
+    					<option value="1">ADMIN</option>
+    					<option value="2">USER</option>
+   					</select>
+				</label>
+			</tr>
+		
+			<tr>
+				<td colspan="2" align="center"><input type="submit" value="Edit" /></td>
+			</tr>
+		
+		
+		</table>	
+	</form>   
+	</div>
 </body>
 </html>

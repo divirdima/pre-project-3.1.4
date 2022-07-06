@@ -1,7 +1,9 @@
 package ru.kata.spring.boot_security.demo.service;
 
 import java.util.Collection;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 import javax.persistence.EntityManager;
@@ -73,6 +75,7 @@ public class UserServiceImp implements UserService{
 		User temp = em.find(User.class, id);
 		temp.setName(user.getName());
 		temp.setWallet(user.getWallet());
+		temp.setRoles(user.getRoles());
 		em.merge(temp);
 		
 	}
@@ -91,5 +94,18 @@ public class UserServiceImp implements UserService{
 		}
 		return new org.springframework.security.core.userdetails.User(user.getName(), user.getPassword(),
 				user.getAuthorities());
+	}
+
+	@Override
+	public Set<Role> getRoles(List<Long> roles) {
+		Set<Role> result = new HashSet<>();
+		for (Long role : roles) {
+			switch (role.intValue()) {
+				case 1 : result.add(new Role(1, "ROLE_ADMIN")); break;
+				case 2 : result.add(new Role(2, "ROLE_USER")); break;
+				default: break;
+			}
+		}
+		return result;
 	}
 }

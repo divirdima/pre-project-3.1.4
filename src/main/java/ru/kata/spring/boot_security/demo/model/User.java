@@ -52,6 +52,11 @@ public class User  implements UserDetails {
 		this.wallet = wallet;
 	}
 	
+	
+	public String getRoleNames() {
+		return roles.stream().map(r -> r.getName()).collect(Collectors.joining());
+	}
+	
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
 		return roles.stream().map(r -> new SimpleGrantedAuthority(r.getName())).collect(Collectors.toList());
