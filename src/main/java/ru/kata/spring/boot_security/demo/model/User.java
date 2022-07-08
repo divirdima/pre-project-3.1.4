@@ -57,6 +57,10 @@ public class User  implements UserDetails {
 		return roles.stream().map(r -> r.getName()).collect(Collectors.joining());
 	}
 	
+	public boolean isNotAdmin() {
+		return !getRoleNames().contains("ADMIN");
+	}
+	
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
 		return roles.stream().map(r -> new SimpleGrantedAuthority(r.getName())).collect(Collectors.toList());
