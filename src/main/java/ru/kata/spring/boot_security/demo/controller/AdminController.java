@@ -69,6 +69,7 @@ public class AdminController {
 	public String saveUpdate(@ModelAttribute("user") User user, @RequestParam(value="role") ArrayList<Long> roles , @PathVariable("id") int id) {
 		Set<Role> roleArrayList = userService.getRoles(roles);
         user.setRoles(roleArrayList);
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
 		userService.update(id, user);
 		return "redirect:/admin/users";
 	}

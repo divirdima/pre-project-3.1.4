@@ -17,6 +17,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -38,9 +39,6 @@ public class UserServiceImp implements UserService{
 	
 	@PersistenceContext
 	EntityManager em;
-	
-	//@Autowired
-    //BCryptPasswordEncoder bCryptPasswordEncoder;
 	
 	
 	public Integer getIdByUsername(String username) {
@@ -76,6 +74,7 @@ public class UserServiceImp implements UserService{
 		temp.setName(user.getName());
 		temp.setWallet(user.getWallet());
 		temp.setRoles(user.getRoles());
+		temp.setPassword(user.getPassword());
 		em.merge(temp);
 		
 	}
