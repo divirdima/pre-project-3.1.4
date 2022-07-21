@@ -32,24 +32,33 @@ public class User  implements UserDetails {
 	            inverseJoinColumns = @JoinColumn(name = "role_id"))
 	Set<Role> roles;
 	
-	@Column(name="name")
-	private String name;
+	@Column(name="firstName")
+	private String firstName;
+	
+	@Column(name="lastName")
+	private String lastName;
+	
+	@Column(name="email")
+	private String email;
 	
 	@Column(name="password")
     private String password;
 	
-	@Column(name="wallet")
-	private double wallet;
+	@Column(name="age")
+	private double age;
 	
 	
 	public User() {
 		
 	}
 	
-	public User(int id, String name, double wallet) {
+	public User(int id, String firstName, String lastName, String email, double age) {
+		super();
 		this.id = id;
-		this.name = name;
-		this.wallet = wallet;
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.email = email;
+		this.age = age;
 	}
 	
 	
@@ -73,7 +82,7 @@ public class User  implements UserDetails {
 
 	@Override
 	public String getUsername() {
-		return name;
+		return firstName;
 	}
 
 	@Override
@@ -94,7 +103,6 @@ public class User  implements UserDetails {
 	@Override
 	public boolean isEnabled() {
 		return true;
-	}
-	
+	}	
 	
 }

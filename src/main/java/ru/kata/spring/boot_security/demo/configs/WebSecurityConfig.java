@@ -31,16 +31,19 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http
+        		.cors().disable()
+        		.csrf().disable()
                 .authorizeRequests()
                 	.antMatchers("/", "/index").permitAll()
                 	.antMatchers("/admin/**").hasRole("ADMIN")
-                	.antMatchers("/users/**").hasAnyRole("ADMIN", "USER")
+                	.antMatchers("/info/**").hasAnyRole("ADMIN", "USER")
                 	.anyRequest().authenticated()
                 .and()
                 	.formLogin().successHandler(successUserHandler)
                 	.permitAll()
                 .and()
                 	.logout()
+                	 .logoutSuccessUrl("/login")
                 	.permitAll();
     }
     
@@ -58,36 +61,4 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     	
     	return authenticationProvider;
     }
-
-    // аутентификация inMemory
-//    @Bean
-//    @Override
-//    public UserDetailsService userDetailsService() {
-//    	UserDetails user =
-//                User.withDefaultPasswordEncoder()
-//                        .username("user")
-//                        .password("user")
-//                        .roles("USER")
-//                        .build();
-//    	UserDetails user1 =
-//                User.withDefaultPasswordEncoder()
-//                        .username("Jiovanni")
-//                        .password("user")
-//                        .roles("USER")
-//                        .build();
-//        UserDetails user2 =
-//                User.withDefaultPasswordEncoder()
-//                        .username("Karlo")
-//                        .password("user")
-//                        .roles("USER")
-//                        .build();
-//        UserDetails admin =
-//                User.withDefaultPasswordEncoder()
-//                        .username("admin")
-//                        .password("admin")
-//                        .roles("ADMIN")
-//                        .build();
-//
-//        return new InMemoryUserDetailsManager(user,user1, user2, admin);
-//    }
-}
+ }
